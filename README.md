@@ -1,14 +1,20 @@
 # M-Diffushadow
 
-M-Diffushadow is a multimodal Diffushadow project for learning quantum classical-shadow measurement data with a masked-token Transformer.  The current code focuses on two one-dimensional spin-chain settings:
+M-Diffushadow is a multimodal discrete-diffusion language model for quantum many-body measurement data. It learns the distribution of classical-shadow measurement records and generates physically consistent samples by iteratively denoising masked discrete tokens.
+
+Quantum many-body systems are difficult to describe directly because their Hilbert space grows exponentially with system size. In practice, experiments and numerical studies often access these systems through stochastic measurement records rather than explicit wavefunctions. Classical-shadow tomography provides an efficient route for estimating physical observables from randomized measurements, but the resulting data are discrete, high-dimensional, and often heterogeneous across measurement protocols.
+
+M-Diffushadow models these measurement records directly. Instead of training a separate model for each downstream observable, it generates reusable measurement samples that can later be processed to estimate energy, magnetization, correlation functions, and other physical quantities. Once trained, the model can act as a data surrogate, producing large numbers of measurement samples conditioned on physical parameters.
+
+The multimodal setting combines complementary views of the same quantum state:
+
+- **B / single modality**: single-site Pauli classical-shadow measurements.
+- **C / pair modality**: nearest-neighbor two-site Pauli product measurements that encode local correlations.
+
+The framework supports joint multimodal generation, cross-modal conditional generation, and partial reconstruction from incomplete observations. This repository focuses on one-dimensional quantum spin-chain experiments:
 
 - **TFI**: transverse-field Ising model.
-- **XXZ**: periodic XXZ spin chain, with both single-site shadow samples and nearest-neighbor two-site product samples.
-
-The main idea is to train a model to complete masked measurement outcomes conditioned on the physical parameter and measurement bases.  In the multimodal setting, the model sees two complementary modalities:
-
-- **B / single modality**: single-site Pauli measurements.
-- **C / pair modality**: nearest-neighbor two-site Pauli product measurements.
+- **XXZ**: periodic XXZ spin chain with both single-site shadows and nearest-neighbor pair-product measurements.
 
 ## Repository Layout
 
