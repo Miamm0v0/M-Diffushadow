@@ -34,17 +34,14 @@ This repository accompanies the following paper:
 .
 |-- Qmultimodel.py                     # Multimodal Transformer model
 |-- train_multi.py                     # Multimodal training script
-|-- eval_new.py                        # Evaluation and sample generation
 |-- eval_utils.py                      # Hamiltonians, exact values, shadow estimators
 |-- generate_xxz_multimodal_dataset.py # XXZ multimodal dataset generation
 |-- eval_multimodal_partial.py         # Partial-mask FM consistency evaluation
 |-- cal_xxz_multimodal_errors.py       # Error metrics for XXZ .npz outputs
-|-- draw_fig_properties.py             # Plotting for TFI/J1J2/ANNNI-style outputs
-|-- draw_fig_properties_xxz.py         # Plotting for XXZ multimodal outputs
 `-- draw_loss.py                       # Training loss visualization
 ```
 
-Some scripts also keep compatibility hooks for older single-modal baselines and other spin models.  The main multimodal path is `Qmultimodel.py` + `train_multi.py` + `eval_new.py`.
+Some scripts also keep compatibility hooks for older single-modal baselines and other spin models. The main multimodal training path is `Qmultimodel.py` + `train_multi.py`.
 
 ## Data Format
 
@@ -130,40 +127,9 @@ python train_multi.py \
 
 The training script randomly masks B/C outcomes and computes cross-entropy loss only on the masked positions.
 
-## Evaluate
+## Error Analysis and Training Loss
 
-Example XXZ evaluation:
-
-```bash
-python eval_new.py \
-  --multimodal \
-  --predict_model xxz \
-  --generate_target both \
-  --model_path checkpoints/m_diffushadow_xxz.pth \
-  --save_data_path outputs/xxz_eval.npz \
-  --num_qubits 10 \
-  --h_length 41 \
-  --sample_size_per_h 10000 \
-  --repeat_times 6 \
-  --diffusion_steps 6 \
-  --exact_value
-```
-
-The saved `.npz` contains generated-shadow estimates and, when `--exact_value` is enabled, exact reference curves for comparison.
-
-## Plot and Error Analysis
-
-Plot XXZ multimodal properties:
-
-```bash
-python draw_fig_properties_xxz.py \
-  --file outputs/xxz_eval.npz \
-  --output_dir plots/xxz \
-  --modalities both \
-  --show_phase_boundaries
-```
-
-Compute XXZ error metrics:
+Compute error metrics for an existing XXZ `.npz` output:
 
 ```bash
 python cal_xxz_multimodal_errors.py \
@@ -184,4 +150,3 @@ python draw_loss.py \
 - The code assumes grouped training data.  `train_multi.py` currently groups training rows in blocks of `10000` samples per physical-parameter value.
 - `Qmultimodel.py` uses fixed sequence lengths for `N = 10`: single length `21`, pair length `31`, and combined Transformer length `41`.
 - TFI datasets should follow the same B/C JSON conventions as above.
-- `eval_new.py` contains legacy support for additional models and baseline architectures; keep the corresponding model files in the repository if you plan to expose those paths.

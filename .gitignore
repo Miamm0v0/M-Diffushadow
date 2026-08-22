@@ -1,1 +1,5 @@
 *.pdf
+
+# Unreleased scripts
+eval_new.py
+draw_fig_properties*.py
