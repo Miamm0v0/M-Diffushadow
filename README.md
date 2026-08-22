@@ -16,6 +16,15 @@ The framework supports joint multimodal generation, cross-modal conditional gene
 - **TFI**: transverse-field Ising model.
 - **XXZ**: periodic XXZ spin chain with both single-site shadows and nearest-neighbor pair-product measurements.
 
+## Paper
+
+This repository accompanies the following paper:
+
+> **Multimodal discrete diffusion for quantum measurement generation in the 1D transverse-field Ising model**  
+> YanHong Li and Ho-Kin Tang  
+> *APS Open Science*, accepted 17 August 2026  
+> [Paper](https://journals.aps.org/apsos/accepted/10.1103/4tft-d7gf) | [DOI](https://doi.org/10.1103/4tft-d7gf)
+
 ## Repository Layout
 
 ```text
