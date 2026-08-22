@@ -1,5 +1,8 @@
 # M-Diffushadow
 
+> [!IMPORTANT]
+> **Project status:** This repository is currently being organized and does not yet contain the complete, release-ready codebase associated with the paper. Some training and evaluation scripts, configurations, datasets, pretrained checkpoints, and documentation may be incomplete or subject to change. We are actively preparing a cleaner and more reproducible release; please check back for updates.
+
 M-Diffushadow is a multimodal discrete-diffusion language model for quantum many-body measurement data. It learns the distribution of classical-shadow measurement records and generates physically consistent samples by iteratively denoising masked discrete tokens. To our knowledge, this work represents one of the first applications of discrete diffusion-based generative modeling to quantum many-body measurement data, and the first to explicitly address multimodal quantum measurement generation within a unified framework.
 
 Quantum many-body systems are difficult to describe directly because their Hilbert space grows exponentially with system size. In practice, experiments and numerical studies often access these systems through stochastic measurement records rather than explicit wavefunctions. Classical-shadow tomography provides an efficient route for estimating physical observables from randomized measurements, but the resulting data are discrete, high-dimensional, and often heterogeneous across measurement protocols.
